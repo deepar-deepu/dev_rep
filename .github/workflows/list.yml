@@ -61,4 +61,3 @@ jobs:
         with:
           name: branches_list.csv
           path: branches_list.csv
-has context menu
