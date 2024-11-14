@@ -10,13 +10,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install GitHub CLI
-        run: sudo apt-get install -y gh
-
-      - name: Authenticate with GitHub CLI
+      - name: List branches with GitHub API
         env:
-          GITHUB_TOKEN: ${{ secrets.Deepa }}
-        run: gh auth login --with-token <<< "$GITHUB_TOKEN"
-
-      - name: List branches
-        run: gh repo view deepar-deepu/dev_repdev_rep --json branches --jq '.branches[].name'
+          GITHUB_TOKEN: ${{ secrets.Deepa }}  # Ensure this secret is available in repository settings
+        run: |
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" \
+          https://api.github.com/repos/deepar-deepu/dev_repdev_rep/branches | jq '.[].name'
