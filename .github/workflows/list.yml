@@ -19,5 +19,4 @@ jobs:
         run: gh auth login --with-token <<< "$GITHUB_TOKEN"
 
       - name: List branches
-        run: gh repo view deepar-deepu/dev_repdev_rep
- --json branches --jq '.branches[].name'
+        run: gh repo view deepar-deepu/dev_repdev_rep --json branches --jq '.branches[].name'
