@@ -1,0 +1,23 @@
+name: List Repository Branches
+
+on:
+  workflow_dispatch:
+
+jobs:
+  list-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install -y gh
+
+      - name: Authenticate with GitHub CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh auth login --with-token <<< "$GITHUB_TOKEN"
+
+      - name: List branches
+        run: gh repo view deepar-deepu/dev_repdev_rep
+ --json branches --jq '.branches[].name'
